@@ -21,7 +21,7 @@ import java.util.Random;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FillingClientScript {
 
-    public static final int CLIENT_AMOUNT = 3_000_000;
+    public static final int CLIENT_AMOUNT = 1_000_000;
     public static final int MIN_CLIENT_AGE = 20;
     public static final int MAX_CLIENT_AGE = 50;
     public static final int MAX_CLIENT_SALARY = 1500;

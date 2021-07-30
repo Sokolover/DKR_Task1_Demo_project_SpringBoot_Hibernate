@@ -32,29 +32,29 @@ import java.util.stream.Collectors;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-integration-test.properties")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-class ClientServiceImplTest {
+class ClientServiceImplTest_TaskB3 {
 
     private final ClientService clientService;
     private final ClientRepository clientRepository;
     private final FillingClientScript fillingClientScript;
 
-    @BeforeAll
-    void initDatabase() {
-        fillingClientScript.fillClientTable();
-    }
+//    @BeforeAll
+//    void initDatabase() {
+//        fillingClientScript.fillClientTable();
+//    }
 
     @Test
     void countSalaryByAgeAscending_StreamAPI() throws IOException {
         List<Client> clients = clientService.countSalaryGroupByAgeAscending();
 
-        writeAnswerToJsonFile(clients, "D:\\countSalaryByAge_StreamAPI.json");
+        writeAnswerToJsonFile(clients, "result/countSalaryByAge_StreamAPI.json");
     }
 
     @Test
     void countSalaryByAgeAscending_JPA() throws IOException {
         List<Client> clients = clientRepository.countSalaryByAgeAscending();
 
-        writeAnswerToJsonFile(clients, "D:\\countSalaryByAge_JPA.json");
+        writeAnswerToJsonFile(clients, "result/countSalaryByAge_JPA.json");
     }
 
     @Test
@@ -62,7 +62,7 @@ class ClientServiceImplTest {
         Map<Integer, Long> result = clientService.countRecordsGroupByAgeHavingLessThenConditionAscending(320L);
         Map<Integer, Long> sortedResult = getSortedResult(result);
 
-        writeAnswerToJsonFile(sortedResult, "D:\\countRecordsGroupByAgeHavingLessThenConditionAscending_StreamAPI.json");
+        writeAnswerToJsonFile(sortedResult, "result/countRecordsGroupByAgeHavingLessThenConditionAscending_StreamAPI.json");
     }
 
     @Test
@@ -70,7 +70,7 @@ class ClientServiceImplTest {
         Map<Integer, Long> result = clientRepository.countRecordsGroupByAgeHavingLessThenConditionAscending(320L);
         Map<Integer, Long> sortedResult = getSortedResult(result);
 
-        writeAnswerToJsonFile(sortedResult, "D:\\countRecordsGroupByAgeHavingLessThenConditionAscending_JPA.json");
+        writeAnswerToJsonFile(sortedResult, "result/countRecordsGroupByAgeHavingLessThenConditionAscending_JPA.json");
     }
 
     private LinkedHashMap<Integer, Long> getSortedResult(Map<Integer, Long> result) {

@@ -55,7 +55,7 @@ class EmployeeRepositoryImplTest_TaskB {
             EmployeeDto employeeDto = employeeConverter.convertToDto(employee);
 
             String result = new Gson().toJson(employeeDto);
-            writeResultToFile("D:\\findEmployeeById.json", result);
+            writeResultToFile("result/findEmployeeById.json", result);
         }
     }
 
@@ -67,7 +67,7 @@ class EmployeeRepositoryImplTest_TaskB {
                 .collect(Collectors.toList());
 
         String result = new Gson().toJson(collect);
-        writeResultToFile("D:\\findAllEmployee.json", result);
+        writeResultToFile("result/findAllEmployee.json", result);
     }
 
     @Test
@@ -76,7 +76,7 @@ class EmployeeRepositoryImplTest_TaskB {
         int pageSize = 10;
 
         List<EmployeeDto> result = findAllEmployeeWithPagination(startPage, pageSize);
-        String fileName = String.format("D:\\findAllEmployee_page_%d.json", startPage);
+        String fileName = String.format("result/findAllEmployee_page_%d.json", startPage);
         String jsonResult = new Gson().toJson(result);
         writeResultToFile(fileName, jsonResult);
     }
@@ -87,7 +87,7 @@ class EmployeeRepositoryImplTest_TaskB {
         int pageSize = 10;
 
         List<EmployeeDto> result = findAllEmployeeWithPagination(startPage, pageSize);
-        String fileName = String.format("D:\\findAllEmployee_page_%d.json", startPage);
+        String fileName = String.format("result/findAllEmployee_page_%d.json", startPage);
         String jsonResult = new Gson().toJson(result);
         writeResultToFile(fileName, jsonResult);
     }
