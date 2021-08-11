@@ -3,7 +3,6 @@ package com.sokolov.demo.repository;
 import com.sokolov.demo.Task1SprintBootJpaApplication;
 import com.sokolov.demo.model.Client;
 import com.sokolov.demo.repository.client.ClientRepository;
-import com.sokolov.demo.utils.FillingClientScript;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -102,7 +101,7 @@ class ClientRepositoryImplTest_TaskA1 {
 
         List<Client> clientsFromDatabase = clientRepository.findAll();
 
-        Assertions.assertEquals(3 + FillingClientScript.CLIENT_AMOUNT, clientsFromDatabase.size());
+        Assertions.assertEquals(clients.size(), clientsFromDatabase.size());
     }
 
 }

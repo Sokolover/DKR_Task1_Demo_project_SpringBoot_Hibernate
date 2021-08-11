@@ -1,6 +1,7 @@
 package com.sokolov.demo.repository.employee;
 
 import com.sokolov.demo.model.employee.Employee;
+import com.sokolov.demo.model.employee.Employee_;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +42,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
             CriteriaDelete<Employee> criteriaDelete = criteriaBuilder.createCriteriaDelete(Employee.class);
             Root<Employee> root = criteriaDelete.from(Employee.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+            criteriaDelete.where(criteriaBuilder.equal(root.get(Employee_.id), id));
 
             Transaction transaction = session.beginTransaction();
             session.createQuery(criteriaDelete).executeUpdate();
@@ -64,7 +65,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
             CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
             Root<Employee> root = criteriaQuery.from(Employee.class);
-            Predicate idPredicate = criteriaBuilder.equal(root.get("id"), id);
+            Predicate idPredicate = criteriaBuilder.equal(root.get(Employee_.id), id);
             criteriaQuery.where(idPredicate);
 
             TypedQuery<Employee> query = session.createQuery(criteriaQuery);

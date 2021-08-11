@@ -1,6 +1,7 @@
 package com.sokolov.demo.repository.student;
 
 import com.sokolov.demo.model.student.lazy.StudentLazy;
+import com.sokolov.demo.model.student.lazy.StudentLazy_;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,7 +43,7 @@ public class StudentRepositoryLazyImpl implements StudentRepositoryLazy {
 
             CriteriaDelete<StudentLazy> criteriaDelete = criteriaBuilder.createCriteriaDelete(StudentLazy.class);
             Root<StudentLazy> root = criteriaDelete.from(StudentLazy.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+            criteriaDelete.where(criteriaBuilder.equal(root.get(StudentLazy_.id), id));
 
             Transaction transaction = session.beginTransaction();
             session.createQuery(criteriaDelete).executeUpdate();
@@ -65,7 +66,7 @@ public class StudentRepositoryLazyImpl implements StudentRepositoryLazy {
 
             CriteriaQuery<StudentLazy> criteriaQuery = criteriaBuilder.createQuery(StudentLazy.class);
             Root<StudentLazy> root = criteriaQuery.from(StudentLazy.class);
-            Predicate idPredicate = criteriaBuilder.equal(root.get("id"), id);
+            Predicate idPredicate = criteriaBuilder.equal(root.get(StudentLazy_.id), id);
             criteriaQuery.where(idPredicate);
 
             TypedQuery<StudentLazy> query = session.createQuery(criteriaQuery);

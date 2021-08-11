@@ -6,7 +6,6 @@ import com.sokolov.demo.model.Client;
 import com.sokolov.demo.repository.client.ClientRepository;
 import com.sokolov.demo.utils.FillingClientScript;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,7 @@
 package com.sokolov.demo.repository.directory;
 
 import com.sokolov.demo.model.directory.lazy.DirectoryLazy;
+import com.sokolov.demo.model.directory.lazy.DirectoryLazy_;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,7 +43,7 @@ public class DirectoryRepositoryLazyImpl implements DirectoryRepositoryLazy {
 
             CriteriaDelete<DirectoryLazy> criteriaDelete = criteriaBuilder.createCriteriaDelete(DirectoryLazy.class);
             Root<DirectoryLazy> root = criteriaDelete.from(DirectoryLazy.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+            criteriaDelete.where(criteriaBuilder.equal(root.get(DirectoryLazy_.id), id));
 
             Transaction transaction = session.beginTransaction();
             session.createQuery(criteriaDelete).executeUpdate();
@@ -77,9 +78,9 @@ public class DirectoryRepositoryLazyImpl implements DirectoryRepositoryLazy {
             CriteriaQuery<DirectoryLazy> criteriaQuery = criteriaBuilder.createQuery(DirectoryLazy.class);
 
             Root<DirectoryLazy> root = criteriaQuery.from(DirectoryLazy.class);
-            root.fetch("factLazies", JoinType.LEFT);
+            root.fetch(DirectoryLazy_.factLazies, JoinType.LEFT);
             criteriaQuery.select(root).distinct(true);
-            Predicate idPredicate = criteriaBuilder.equal(root.get("id"), id);
+            Predicate idPredicate = criteriaBuilder.equal(root.get(DirectoryLazy_.id), id);
             criteriaQuery.where(idPredicate);
 
             Query<DirectoryLazy> query = session.createQuery(criteriaQuery);
@@ -104,7 +105,7 @@ public class DirectoryRepositoryLazyImpl implements DirectoryRepositoryLazy {
             CriteriaQuery<DirectoryLazy> criteriaQuery = criteriaBuilder.createQuery(DirectoryLazy.class);
 
             Root<DirectoryLazy> root = criteriaQuery.from(DirectoryLazy.class);
-            root.fetch("factLazies", JoinType.LEFT);
+            root.fetch(DirectoryLazy_.factLazies, JoinType.LEFT);
             criteriaQuery.select(root).distinct(true);
 
             Query<DirectoryLazy> query = session.createQuery(criteriaQuery);
@@ -119,7 +120,7 @@ public class DirectoryRepositoryLazyImpl implements DirectoryRepositoryLazy {
 
             CriteriaQuery<DirectoryLazy> criteriaQuery = criteriaBuilder.createQuery(DirectoryLazy.class);
             Root<DirectoryLazy> root = criteriaQuery.from(DirectoryLazy.class);
-            Predicate predicate = criteriaBuilder.equal(root.get("name"), name);
+            Predicate predicate = criteriaBuilder.equal(root.get(DirectoryLazy_.name), name);
             criteriaQuery.select(root).where(predicate);
 
             TypedQuery<DirectoryLazy> query = session.createQuery(criteriaQuery);

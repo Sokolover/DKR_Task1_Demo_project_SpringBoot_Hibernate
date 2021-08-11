@@ -1,6 +1,7 @@
 package com.sokolov.demo.repository.student;
 
 import com.sokolov.demo.model.student.eager.StudentEager;
+import com.sokolov.demo.model.student.eager.StudentEager_;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,7 +43,7 @@ public class StudentRepositoryEagerImpl implements StudentRepositoryEager {
 
             CriteriaDelete<StudentEager> criteriaDelete = criteriaBuilder.createCriteriaDelete(StudentEager.class);
             Root<StudentEager> root = criteriaDelete.from(StudentEager.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+            criteriaDelete.where(criteriaBuilder.equal(root.get(StudentEager_.id), id));
 
             Transaction transaction = session.beginTransaction();
             session.createQuery(criteriaDelete).executeUpdate();
@@ -65,7 +66,7 @@ public class StudentRepositoryEagerImpl implements StudentRepositoryEager {
 
             CriteriaQuery<StudentEager> criteriaQuery = criteriaBuilder.createQuery(StudentEager.class);
             Root<StudentEager> root = criteriaQuery.from(StudentEager.class);
-            Predicate idPredicate = criteriaBuilder.equal(root.get("id"), id);
+            Predicate idPredicate = criteriaBuilder.equal(root.get(StudentEager_.id), id);
             criteriaQuery.where(idPredicate);
 
             TypedQuery<StudentEager> query = session.createQuery(criteriaQuery);

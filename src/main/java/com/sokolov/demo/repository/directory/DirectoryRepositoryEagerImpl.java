@@ -1,6 +1,7 @@
 package com.sokolov.demo.repository.directory;
 
 import com.sokolov.demo.model.directory.eager.DirectoryEager;
+import com.sokolov.demo.model.directory.eager.DirectoryEager_;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +42,7 @@ public class DirectoryRepositoryEagerImpl implements DirectoryRepositoryEager {
 
             CriteriaDelete<DirectoryEager> criteriaDelete = criteriaBuilder.createCriteriaDelete(DirectoryEager.class);
             Root<DirectoryEager> root = criteriaDelete.from(DirectoryEager.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+            criteriaDelete.where(criteriaBuilder.equal(root.get(DirectoryEager_.id), id));
 
             Transaction transaction = session.beginTransaction();
             session.createQuery(criteriaDelete).executeUpdate();
@@ -64,7 +65,7 @@ public class DirectoryRepositoryEagerImpl implements DirectoryRepositoryEager {
 
             CriteriaQuery<DirectoryEager> criteriaQuery = criteriaBuilder.createQuery(DirectoryEager.class);
             Root<DirectoryEager> root = criteriaQuery.from(DirectoryEager.class);
-            Predicate idPredicate = criteriaBuilder.equal(root.get("id"), id);
+            Predicate idPredicate = criteriaBuilder.equal(root.get(DirectoryEager_.id), id);
             criteriaQuery.where(idPredicate);
 
             TypedQuery<DirectoryEager> query = session.createQuery(criteriaQuery);

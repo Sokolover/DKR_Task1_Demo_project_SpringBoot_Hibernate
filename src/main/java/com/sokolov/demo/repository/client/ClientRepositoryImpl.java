@@ -1,6 +1,7 @@
 package com.sokolov.demo.repository.client;
 
 import com.sokolov.demo.model.Client;
+import com.sokolov.demo.model.Client_;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,7 +46,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 
             CriteriaDelete<Client> criteriaDelete = criteriaBuilder.createCriteriaDelete(Client.class);
             Root<Client> root = criteriaDelete.from(Client.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
+            criteriaDelete.where(criteriaBuilder.equal(root.get(Client_.id), id));
 
             Transaction transaction = session.beginTransaction();
             session.createQuery(criteriaDelete).executeUpdate();
@@ -68,7 +69,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 
             CriteriaQuery<Client> criteriaQuery = criteriaBuilder.createQuery(Client.class);
             Root<Client> root = criteriaQuery.from(Client.class);
-            Predicate idPredicate = criteriaBuilder.equal(root.get("id"), id);
+            Predicate idPredicate = criteriaBuilder.equal(root.get(Client_.id), id);
             criteriaQuery.where(idPredicate);
 
             TypedQuery<Client> query = session.createQuery(criteriaQuery);
@@ -104,8 +105,8 @@ public class ClientRepositoryImpl implements ClientRepository {
             CriteriaQuery<Client> criteriaQuery = criteriaBuilder.createQuery(Client.class);
             Root<Client> root = criteriaQuery.from(Client.class);
 
-            Path<Object> age = root.get("age");
-            Path<Number> salary = root.get("salary");
+            Path<Object> age = root.get(Client_.AGE);
+            Path<Number> salary = root.get(Client_.SALARY);
             criteriaQuery.select(criteriaBuilder.construct(Client.class, age, criteriaBuilder.sum(salary)))
                     .groupBy(age)
                     .orderBy(criteriaBuilder.asc(age));
@@ -130,7 +131,7 @@ public class ClientRepositoryImpl implements ClientRepository {
             CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createQuery(Tuple.class);
             Root<Client> root = criteriaQuery.from(Client.class);
 
-            Path<Object> age = root.get("age");
+            Path<Object> age = root.get(Client_.AGE);
             Expression<Long> countRecords = criteriaBuilder.count(root);
             criteriaQuery.multiselect(age, countRecords)
                     .groupBy(age)
@@ -155,13 +156,13 @@ public class ClientRepositoryImpl implements ClientRepository {
 
             Subquery<Double> subquery = criteriaQuery.subquery(Double.class);
             Root<Client> subqueryRoot = subquery.from(Client.class);
-            subquery.select(criteriaBuilder.min(subqueryRoot.get("salary")));
+            subquery.select(criteriaBuilder.min(subqueryRoot.get(Client_.SALARY)));
 
             criteriaQuery.select(root)
                     .where(criteriaBuilder.equal(
-                            root.get("salary"),
+                            root.get(Client_.salary),
                             subquery))
-                    .orderBy(criteriaBuilder.desc(root.get("secondName")));
+                    .orderBy(criteriaBuilder.desc(root.get(Client_.secondName)));
 
             Query<Client> query = session.createQuery(criteriaQuery);
             return query.getResultList();
