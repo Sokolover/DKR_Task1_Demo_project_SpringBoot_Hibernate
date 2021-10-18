@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-integration-test.properties")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
+//@Sql(value = "classpath:drop_create_client_table.sql")
 class ClientServiceImplTest_TaskB3 {
 
     private final ClientService clientService;

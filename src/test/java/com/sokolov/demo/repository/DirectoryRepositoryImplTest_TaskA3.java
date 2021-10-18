@@ -32,7 +32,7 @@ import java.util.*;
         classes = Task1SprintBootJpaApplication.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureMockMvc
-@TestPropertySource(locations = "classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-integration-test.properties")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Sql(value = "classpath:drop_create_directory_fact_table.sql")
 class DirectoryRepositoryImplTest_TaskA3 {
